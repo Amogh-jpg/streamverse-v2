@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Heart, LogOut, User as UserIcon } from "lucide-react";
+import { Bookmark, ListVideo, LogOut, User as UserIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -63,15 +63,21 @@ export function UserMenu({ user }: { user: SessionUser | null }) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/watchlist">
-            <Heart className="size-4" />
+          <Link href="/profile">
+            <UserIcon className="size-4" />
             My World
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/watchlist">
-            <UserIcon className="size-4" />
+            <Bookmark className="size-4" />
             Watchlist
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/collections">
+            <ListVideo className="size-4" />
+            Collections
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

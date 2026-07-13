@@ -14,7 +14,7 @@ import { getWatchlistItems } from "@/lib/watchlist";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "My World",
+  title: "Watchlist",
   description: "Your saved watchlist.",
 };
 
@@ -80,7 +80,7 @@ export default async function WatchlistPage() {
 function Header({ count }: { count?: number }) {
   return (
     <header className="space-y-1">
-      <h1 className="text-2xl font-bold sm:text-3xl">My World</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">Watchlist</h1>
       <p className="text-sm text-muted-foreground">
         {count !== undefined && count > 0
           ? `${count} saved ${count === 1 ? "title" : "titles"} in your watchlist`

@@ -8,7 +8,7 @@ plain catalog — with a universal, normalized interface across content vertical
 > movies, TV episodes, or music. Every "watch" action links out to an official
 > third-party provider. Only official trailers (YouTube) are embedded.
 
-This repository is currently at **Phase 1 (MVP)**. See
+This repository is progressing through **Phase 2**. See
 [Roadmap](#roadmap) for what's shipped and what's next.
 
 ## Features (Phase 1)
@@ -25,6 +25,20 @@ This repository is currently at **Phase 1 (MVP)**. See
 - **Watchlist ("My World")** — save/remove titles, persisted per user with RLS.
 - Dark, glassmorphism UI; responsive; accessible; loading & empty states
   throughout.
+
+## Features (Phase 2 — Profiles, Reviews & Collections)
+
+- **User Profiles** — editable display name, bio, avatar and a shareable public
+  handle (`/profile/<slug>`). Profiles are private by default and can be made
+  public per user.
+- **Reviews (CRUD)** — rate titles 1–10 with an optional written review from any
+  movie or show page. One review per title per user (edit/delete supported);
+  reviews are publicly readable and surface an aggregate community score.
+- **Custom Collections** — create private or public themed lists, add/remove
+  titles from any detail page via "Add to collection", and manage or share them
+  from `/collections`.
+- All new user data is protected by Row Level Security and validated server-side
+  with Zod (`src/lib/validation.ts`).
 
 ## Tech Stack
 
@@ -55,7 +69,12 @@ src/
     supabase/          Browser/server clients + auth cookie refresh
     env.ts             Centralized, validated env access
     watchlist.ts       Server-only watchlist data access
-supabase/migrations/   SQL schema (0001) + RLS policies (0002)
+    profiles.ts        Server-only profile data access
+    reviews.ts         Server-only reviews data access
+    collections.ts     Server-only collections data access
+    validation.ts      Shared Zod schemas for user-generated input
+  app/actions/         Server actions (profile, reviews, collections)
+supabase/migrations/   SQL schema (0001) + RLS (0002) + Phase 2 additions (0003)
 proxy.ts               Next.js 16 proxy (Supabase session refresh)
 ```
 
@@ -99,7 +118,9 @@ of live data.
 
 Apply the migrations in `supabase/migrations/` to your Supabase project (via the
 Supabase SQL editor or CLI). `0001_init.sql` creates the schema and the
-profile-on-signup trigger; `0002_rls.sql` enables Row Level Security.
+profile-on-signup trigger; `0002_rls.sql` enables Row Level Security;
+`0003_phase2_profiles_reviews_collections.sql` adds Phase 2 columns, indexes,
+constraints and `updated_at` triggers for profiles, reviews and collections.
 
 ## Scripts
 
@@ -128,10 +149,14 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the Vercel + Supabase guide.
 
 ## Roadmap
 
-- **Phase 1 (this repo):** Home, Movies, TV, Search, Auth, Watchlist. ✅
-- **Phase 2+:** AI Assistant, Entertainment DNA, AI Picks, recommendation
-  feedback, Watch Together, public profiles, additional verticals (anime,
-  music), notifications, premium/payments. _(Not yet implemented.)_
+- **Phase 1:** Home, Movies, TV, Search, Auth, Watchlist. ✅
+- **Phase 2 (in progress):**
+  - User Profiles, Reviews (CRUD), Custom Collections. ✅
+  - Entertainment DNA, AI Picks, Recommendation Feedback, Shareable DNA Card.
+    _(Planned.)_
+  - AI Assistant, AI Memory, Google Gemini integration. _(Planned.)_
+- **Later:** Watch Together, additional verticals (anime, music),
+  notifications, premium/payments. _(Not yet implemented.)_
 
 ## Attribution
 

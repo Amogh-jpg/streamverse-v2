@@ -16,11 +16,13 @@ export function MediaDetailView({
   detail,
   isAuthenticated,
   inWatchlist,
+  extraActions,
   children,
 }: {
   detail: MediaDetail;
   isAuthenticated: boolean;
   inWatchlist: boolean;
+  extraActions?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   const runtime = formatRuntime(detail.runtimeMinutes);
@@ -121,6 +123,7 @@ export function MediaDetailView({
                   initialInWatchlist={inWatchlist}
                   isAuthenticated={isAuthenticated}
                 />
+                {extraActions}
               </div>
             </div>
           </div>

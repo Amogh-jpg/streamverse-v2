@@ -17,7 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Trending", href: "/", icon: Flame },
   { label: "Movies", href: "/movies", icon: Clapperboard, prefix: true },
   { label: "TV Shows", href: "/tv", icon: Tv, prefix: true },
-  { label: "My World", href: "/watchlist", icon: Heart, prefix: true },
+  { label: "My World", href: "/profile", icon: Heart, prefix: true },
 ];
 
 export function isActive(pathname: string, item: NavItem): boolean {
